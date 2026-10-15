@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de Commandes & Produits</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="container navbar__content">
+            <div class="brand">
+                <span class="brand__name">Mana Consulting</span>
+            </div>
+            <div class="tabs">
+                <button id="nav-products" class="tab tab--active">Gestion des Produits</button>
+                <button id="nav-orders" class="tab">Commandes & Suivi</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container page">
+        <div id="alert-box" class="alert hidden"></div>
+
+        <!-- ONGLET PRODUITS -->
+        <section id="tab-products">
+            <header class="section-header">
+                <div>
+                    <h1 class="title">Catalogue des Produits</h1>
+                </div>
+                <button id="btn-add-product" class="btn btn--primary">+ Ajouter un produit</button>
+            </header>
+
+            <div class="card">
+                <div class="table-wrapper">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID (Serial)</th>
+                                <th>UID Référence</th>
+                                <th>Nom du produit</th>
+                                <th>Prix unitaire</th>
+                                <th>Stock</th>
+                                <th class="text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-table-body"></tbody>
+                    </table>
+                </div>
+
+                <div class="pagination">
+                    <span id="pagination-info" class="subtitle"></span>
+                    <div class="pagination__controls">
+                        <button id="btn-prev" class="btn btn--outline">Précédent</button>
+                        <span id="page-indicator" class="pagination__page">Page 1 / 1</span>
+                        <button id="btn-next" class="btn btn--outline">Suivant</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ONGLET COMMANDES -->
+        <section id="tab-orders" class="hidden">
+            <header class="section-header">
+                <div>
+                    <h1 class="title">Commandes & Suivi</h1>
+                    <p class="subtitle">Passez des commandes et suivez leur état.</p>
+                </div>
+            </header>
+
+            <div class="grid-2">
+                <div class="card card--padded">
+                    <h2 class="card__title">Passer une commande</h2>
+                    <div class="table-wrapper table-wrapper--scroll">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>UID / Produit</th>
+                                    <th>Stock dispo</th>
+                                    <th class="text-center">Quantité</th>
+                                </tr>
+                            </thead>
+                            <tbody id="products-order-table"></tbody>
+                        </table>
+                    </div>
+                    <button id="btn-submit-order" class="btn btn--success btn--full">Valider la commande</button>
+                </div>
+
+                <div class="card card--padded">
+                    <h2 class="card__title">Historique des commandes</h2>
+                    <div id="orders-container" class="orders"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL PRODUIT -->
+    <div id="product-modal" class="modal hidden">
+        <div class="modal__box">
+            <h3 id="modal-title" class="modal__title">Ajouter un produit</h3>
+
+            <form id="product-form" class="form">
+                <input type="hidden" id="product-db-id">
+
+                <label class="form__field">
+                    <span>UID Référence unique</span>
+                    <input type="text" id="p-uid" required>
+                </label>
+
+                <label class="form__field">
+                    <span>Nom du produit</span>
+                    <input type="text" id="p-name" required>
+                </label>
+
+                <div class="form__row">
+                    <label class="form__field">
+                        <span>Prix unitaire (€)</span>
+                        <input type="number" id="p-price" step="0.01" min="0" required>
+                    </label>
+                    <label class="form__field">
+                        <span>Quantité en stock</span>
+                        <input type="number" id="p-stock" min="0" required>
+                    </label>
+                </div>
+
+                <div class="form__actions">
+                    <button type="submit" id="btn-save-product" class="btn btn--primary btn--grow">Enregistrer</button>
+                    <button type="button" id="btn-cancel-product" class="btn btn--secondary">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
